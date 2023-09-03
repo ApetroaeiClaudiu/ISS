@@ -1,0 +1,44 @@
+syntax="proto3";
+package protocol;
+
+
+
+message Medicament{
+  int32 id = 1;
+  string nume = 2;
+  float pret = 3;
+  string detalii = 4;
+}
+
+message Request {
+  enum Type { Login = 0; Logout = 1;  AdaugareMedicament = 2; StergereMedicament = 3; ModificareMedicament = 4; AfisareMedicamente = 5;}
+
+  // Identifies which request is filled in.
+  Type type = 1;
+  // One of the following will be filled in, depending on the type.
+  string id = 2;
+  string username = 3;
+  string password = 4;
+  string rol = 5;
+
+  int32 idMedicament = 6;
+  string numeMedicament = 7;
+  float pretMedicament = 8;
+  string detaliiMedicament = 9;
+}
+
+message Response{
+  enum Type { Ok = 0; Error = 1; ListaMedicamente = 2; }
+
+  // Identifies which request is filled in.
+  Type type = 1;
+
+  // One of the following will be filled in, depending on the type.
+  int32 id = 2;
+  string username = 3;
+  string password = 4;
+  string rol = 5;
+  string error = 6;
+  repeated Medicament medicamente = 7;
+
+}
